@@ -1,0 +1,29 @@
+main {
+min-height: 80vh;
+}
+h3{
+    padding: 1rem 0;
+}
+h1{
+    font-size: 1.8rem;
+    padding: 1rem 0;
+}
+h1{
+    font-size: 1.4rem;
+    padding: 0.5rem 0;
+}
+.rating span {
+    margin: 0.1rem;
+}
+.cart{
+    font-size: 12px;
+    background: #007bff;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -10px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius: 50px;
+}
+
