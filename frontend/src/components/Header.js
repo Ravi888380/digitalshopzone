@@ -44,6 +44,21 @@ const logoutHandler =()=>{
       (<LinkContainer to='/login'>
       <Nav.Link><i className='fa fa-user mr-2'></i> Sign In</Nav.Link>
       </LinkContainer>)}
+
+{userInfo && userInfo.isAdmin && (
+ <NavDropdown title='Admin' className='drowndown-menu' id='username'>
+ <LinkContainer to='/admin/userlist'>
+   <NavDropdown.Item className='drowndown-submenu'>Users</NavDropdown.Item>
+ </LinkContainer>
+ <LinkContainer to='/admin/productlist'>
+   <NavDropdown.Item className='drowndown-submenu'>Products</NavDropdown.Item>
+ </LinkContainer>
+ <LinkContainer to='/admin/orderlist'>
+   <NavDropdown.Item className='drowndown-submenu'>Orders</NavDropdown.Item>
+ </LinkContainer>
+</NavDropdown>
+)}
+
       <NavDropdown title='More'>
       <LinkContainer to='/update'>
       <NavDropdown.Item><i className='fa fa-bell mr-2'></i> Nodification</NavDropdown.Item>
