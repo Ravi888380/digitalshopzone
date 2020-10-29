@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect} from 'react'
 import {Button, Table} from 'react-bootstrap'
 import {useDispatch,useSelector} from 'react-redux'
 import Message from '../components/Message'
@@ -26,13 +26,12 @@ const UserListScreen = ({history}) => {
             history.push('/login')
         }
        
-    },[dispatch,history,successDelete])
+    },[dispatch,history,successDelete,userInfo])
 
     const deleteHandler = (id) =>{
         if(window.confirm('Are you sure')){
         dispatch(deleteUser(id))}
     }
-
     return (
         <>
             <h1>Users</h1>
@@ -58,7 +57,7 @@ const UserListScreen = ({history}) => {
                         (<i className='fa fa-times' style={{color:'red'}}></i>)}
                         </td>
                         <td>
-                        <LinkContainer to={`/user/${user._id}/edit`}>
+                        <LinkContainer to={`/admin/user/${user._id}/edit`}>
                             <Button variant='primary' className='btn btn-sm ml-2'>
                                 <i className='fas fa-edit'></i>
                             </Button>
