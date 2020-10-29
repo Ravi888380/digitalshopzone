@@ -103,6 +103,7 @@ const submitHandler =(e)=>{
                                <th>TOTAL</th>
                                <th>PAID</th>
                                <th>DELIVERIED</th>
+                               <th></th>
                            </tr>
                        </thead>
                        <tbody>
@@ -120,7 +121,7 @@ const submitHandler =(e)=>{
                                    )}</td>
                                    <td>
                                        <LinkContainer to={`/order/${order._id}`}>
-                                           <Button variant='info' className='btn btn-sm'>Details</Button>
+                                           <Button variant='info' className='btn btn-sm ml-2'>Details</Button>
                                        </LinkContainer>
                                    </td>
                                    

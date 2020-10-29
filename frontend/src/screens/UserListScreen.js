@@ -4,7 +4,7 @@ import {useDispatch,useSelector} from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import {LinkContainer} from 'react-router-bootstrap'
-import {listUsers} from '../actions/userActions'
+import {listUsers,deleteUser} from '../actions/userActions'
 
 const UserListScreen = ({history}) => {
 
@@ -15,6 +15,9 @@ const UserListScreen = ({history}) => {
 
     const userLogin= useSelector(state => state.userLogin)
     const {userInfo}=userLogin
+    
+    const userDelete= useSelector(state => state.userDelete)
+    const {success:successDelete}=userDelete
 
     useEffect(()=>{
         if(userInfo && userInfo.isAdmin){
@@ -23,11 +26,11 @@ const UserListScreen = ({history}) => {
             history.push('/login')
         }
        
-    },[dispatch,history])
+    },[dispatch,history,successDelete])
 
-    const deleteHandler = () =>{
-        
-        console.log('delete')
+    const deleteHandler = (id) =>{
+        if(window.confirm('Are you sure')){
+        dispatch(deleteUser(id))}
     }
 
     return (
@@ -60,7 +63,7 @@ const UserListScreen = ({history}) => {
                                 <i className='fas fa-edit'></i>
                             </Button>
                         </LinkContainer>
-                         <Button variant='primary' className='btn btn-sm ml-2' onClick={()=>deleteHandler(user._id)}>
+                         <Button variant='danger' className='btn btn-sm ml-2' onClick={()=> deleteHandler(user._id)}>
                          <i className='fas fa-trash'></i>
                      </Button>
                         </td>
