@@ -22,7 +22,7 @@ const logoutHandler =()=>{
 
     return (
             <header>     
-            <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
+            <Navbar bg='light' variant='light' expand='lg' collapseOnSelect>
             <Container>
               <LinkContainer to='/'>
                 <Navbar.Brand>Proshop</Navbar.Brand>
@@ -32,13 +32,12 @@ const logoutHandler =()=>{
   <Navbar.Collapse id="basic-navbar-nav">
     <Route render ={({history}) => <SearchBox history={history}/> } />
     <Nav className="ml-auto drowndown">
-    
       {userInfo ? (
-        <NavDropdown title={userInfo.name} className='drowndown-menu' id='username'>
+        <NavDropdown title={userInfo.name} className='dropdown' data-hover="dropdown" data-toggle="dropdown" id='username'>
           <LinkContainer to='/profile'>
-            <NavDropdown.Item className='drowndown-submenu'>Profile</NavDropdown.Item>
+            <NavDropdown.Item className='drowndown'>Profile</NavDropdown.Item>
           </LinkContainer>
-          <NavDropdown.Item className='drowndown-submenu' onClick={logoutHandler}>LogOut</NavDropdown.Item>
+          <NavDropdown.Item className='drowndown' onClick={logoutHandler}>LogOut</NavDropdown.Item>
         </NavDropdown>
       ):
       (<LinkContainer to='/login'>
@@ -67,9 +66,11 @@ const logoutHandler =()=>{
       <NavDropdown.Item><i className='fa fa-phone-alt mr-2'></i> 24/7 Customer Care</NavDropdown.Item>
       </LinkContainer>
       </NavDropdown>
-      
+      <LinkContainer to='/favoriteitems'>
+      <Nav.Link><i className='far fa-heart'></i><span className='cart' style={{visibility:`${cartItems.reduce((acc, item) => acc+ item.qty,0) === 0 ? 'hidden': 'visible'}`}}>{cartItems.reduce((acc, item) => acc+ item.qty,0)}</span></Nav.Link>
+      </LinkContainer>
     <LinkContainer to='/cart'>
-      <Nav.Link><i className='fa fa-shopping-cart'></i><span className='cart' style={{visibility:`${cartItems.reduce((acc, item) => acc+ item.qty,0) === 0 ? 'hidden': 'visible'}`}}>{cartItems.reduce((acc, item) => acc+ item.qty,0)}</span> Cart</Nav.Link>
+      <Nav.Link><i className='fa fa-shopping-cart'></i><span className='cart' style={{visibility:`${cartItems.reduce((acc, item) => acc+ item.qty,0) === 0 ? 'hidden': 'visible'}`}}>{cartItems.reduce((acc, item) => acc+ item.qty,0)}</span></Nav.Link>
       </LinkContainer>
       
     </Nav>

@@ -38,8 +38,9 @@ const submitHandler =(e)=>{
 
     return (
         <FormContainer>
+           <div className="shadow-lg p-3 mb-5 bg-white rounded">
 <Meta title='Create Account' />
-            <h1>SIGN UP</h1>
+            <h1 className='text-center'>SIGN UP</h1>
             {error && <Message variant='danger'>{error}</Message>}
             {message && <Message variant='danger'>{message}</Message>}
             {loading && <Loader />}
@@ -64,7 +65,7 @@ const submitHandler =(e)=>{
                     <Form.Control type='password' placeholder='password' value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)}>
                     </Form.Control>
                 </Form.Group>
-                <Button type='submit' variant='primary'>
+                <Button type='submit' variant='primary' className='btn-block'>
                 REGISTER
                 </Button>
             </Form>
@@ -73,6 +74,7 @@ const submitHandler =(e)=>{
     Have an Account?{' '}<Link to={redirect ? `/login?redirect?=${redirect}`: '/login'}>Login</Link>
     </Col>
             </Row>
+            </div>
         </FormContainer>
     )
 }

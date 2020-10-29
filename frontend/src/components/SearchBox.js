@@ -19,7 +19,7 @@ const SearchBox = ({history}) => {
         <Form onSubmit={submitHandler} inline>
             <Form.Control type='text' name='q' onChange={(e)=> setkeyword(e.target.value)}
             placeholder='search' className='mr-sm-2 ml-sm-5'></Form.Control>
-            <Button type='submit'>
+            <Button type='submit' variant='dark'>
                <i className='fa fa-search'></i>
             </Button>
             

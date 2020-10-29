@@ -40,49 +40,50 @@ const {success:successProductReview, error:errorProductReview} = productReviewCr
 const addToCartHandler = () =>{
 history.push(`/cart/${match.params.id}?qty=${qty}`)
 }
+const buyHandler = () =>{
+    history.push(`/shipping`)
+    }
 const submitHandler = (e) =>{
     e.preventDefault()
     dispatch(createProductReview(match.params.id,{rating,comment}))
     }
     return (     
         <>
-           <Link className='btn btn-secondary my-3' to='/'>Go Back</Link>
+           <p>
+           <Link className='my-3' to='/'>Home</Link>/
+           <Link className='my-3' to='/'>{product.brand}</Link>/
+           <Link className='my-3' to='/'>{product.name}</Link>
+           </p>
            {loading ? <Loader/>: error ? <Message variant='danger'>{error}</Message>: (
               <>
               <Meta title={product.name} />
               <Row>
-               <Col md={6}>
+            <Col md={2}>
+                <ListGroup.Item variant='flush'>
+                <Image src={product.image} alt={product.name} fluid ></Image>
+                </ListGroup.Item>
+                <ListGroup.Item variant='flush'>
+                <Image src={product.image} alt={product.name} fluid ></Image>
+                </ListGroup.Item >
+                <ListGroup.Item variant='flush'>
+                <Image src={product.image} alt={product.name} fluid ></Image>
+                </ListGroup.Item>
+            </Col>
+               <Col md={4}>
                    <Image src={product.image} alt={product.name} fluid ></Image>
                </Col>
-               <Col md={3}>
+               <Col md={5}>
 <ListGroup variant='flush'>
-    <ListGroup.Item>
-    <h2>{product.name}</h2>
-    </ListGroup.Item>
-    <ListGroup.Item>
+<ListGroup.Item>
         <Rating value={product.rating} text={`${product.numReviews} reviews`}></Rating>
     </ListGroup.Item>
     <ListGroup.Item>
-        Price: ${product.price}
+    <h4>{product.name}</h4>
+    <i class="far fa-heart fa-2x"></i>
     </ListGroup.Item>
     <ListGroup.Item>
-        {product.description}
+      <h2>${product.price}</h2>
     </ListGroup.Item>
-</ListGroup>
-               </Col>
-               <Col md={3}>
-                   <Card>
-                       <ListGroup variant='flush'>
-                           <ListGroup.Item>
-                               <Row>
-                                   <Col>Price</Col>
-                                   <Col>
-                                   <strong>
-                                       ${product.price}
-                                       </strong>
-                                       </Col>
-                               </Row>
-                           </ListGroup.Item>
                            <ListGroup.Item>
                                <Row>
                                    <Col>Status</Col>
@@ -93,8 +94,9 @@ const submitHandler = (e) =>{
                                        </Col>
                                </Row>
                            </ListGroup.Item>
-                        { product.countInStock > 0 &&(
+                       
                             <ListGroup.Item>
+                            { product.countInStock > 0 &&(
                                 <Row>
                                     <Col>Qty</Col>
                                     <Col>
@@ -107,13 +109,23 @@ const submitHandler = (e) =>{
                                     </Form.Control>
                                     </Col>
                                 </Row>
+                                 )}
                             </ListGroup.Item>
-                        )}
+                       
                            <ListGroup.Item>
-                               <Button onClick={addToCartHandler} className='btn-block' type='button' disabled={product.countInStock === 0}>Add To Cart</Button>
+                               <Button onClick={addToCartHandler} className='"btn btn-outline-dark float-left' style={{width: '163px'}} type='button' disabled={product.countInStock === 0}>Add To Cart</Button>
+                            
+                               <Button onClick={buyHandler} className='btn btn-dark float-right 'style={{width: '163px'}} type='button' disabled={product.countInStock === 0}>Buy It Now</Button>
+
                            </ListGroup.Item>
-                       </ListGroup>
-                   </Card>
+    <ListGroup.Item>
+        <Row>
+            <h2>Description</h2>
+        </Row>
+        {product.description}
+    </ListGroup.Item>
+</ListGroup>
+                  
                </Col>
            </Row>
            

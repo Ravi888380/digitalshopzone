@@ -22,6 +22,9 @@ const Product = ({product}) => {
 <Card.Text as='h3'>
     ${product.price}
 </Card.Text>
+<Card.Text as='div'>
+    <i className='far fa-heart'></i>
+</Card.Text>
             </Card>
             
     )

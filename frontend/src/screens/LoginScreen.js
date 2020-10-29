@@ -33,7 +33,9 @@ const submitHandler =(e)=>{
 
 
     return (
+        
         <FormContainer >
+            <div className="shadow-lg p-3 mb-5 bg-white rounded">
 <Meta title='Login' />
             <h1 style={{textAlign: 'center'}}>Welcome to Proshop</h1>
             {error && <Message variant='danger'>{error}</Message>}
@@ -62,10 +64,9 @@ const submitHandler =(e)=>{
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="formBasicCheckbox">
-    <Form.Check type="checkbox" label="Check me out" />
+    <Form.Check type="checkbox" label="Remember me" />
   </Form.Group>
-
-                <Button type='submit' variant='primary'>
+                <Button type='submit' variant='primary' className='btn-block'>
                     SIGN IN
                 </Button>
             </Form>
@@ -73,8 +74,13 @@ const submitHandler =(e)=>{
                 <Col>
     New Customer?{' '}<Link to={redirect ? `/register?redirect?=${redirect}`: '/register'}>Register</Link>
     </Col>
+    <p>
+    <Link to={redirect ? `/forgetpassword?=${redirect}`: '/login'} className='text-right mr-2'>Forget password</Link>
+    </p>
             </Row>
+            </div>
         </FormContainer>
+        
     )
 }
 
