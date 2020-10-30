@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react'
-import {Row,Col,ListGroup,Button,Card,Image,Form} from 'react-bootstrap'
+import {Row,Col,ListGroup,Button,Image,Form} from 'react-bootstrap'
 import {useDispatch,useSelector} from 'react-redux'
 import Rating from '../components/Rating'
 import Message from '../components/Message'
@@ -40,9 +40,6 @@ const {success:successProductReview, error:errorProductReview} = productReviewCr
 const addToCartHandler = () =>{
 history.push(`/cart/${match.params.id}?qty=${qty}`)
 }
-const buyHandler = () =>{
-    history.push(`/shipping`)
-    }
 const submitHandler = (e) =>{
     e.preventDefault()
     dispatch(createProductReview(match.params.id,{rating,comment}))
@@ -57,20 +54,15 @@ const submitHandler = (e) =>{
            {loading ? <Loader/>: error ? <Message variant='danger'>{error}</Message>: (
               <>
               <Meta title={product.name} />
-              <Row>
-            <Col md={2}>
-                <ListGroup.Item variant='flush'>
-                <Image src={product.image} alt={product.name} fluid ></Image>
-                </ListGroup.Item>
-                <ListGroup.Item variant='flush'>
-                <Image src={product.image} alt={product.name} fluid ></Image>
-                </ListGroup.Item >
-                <ListGroup.Item variant='flush'>
-                <Image src={product.image} alt={product.name} fluid ></Image>
-                </ListGroup.Item>
-            </Col>
-               <Col md={4}>
+              <Row className="shadow-lg p-3 mb-5 bg-white rounded">
+               <Col md={6}>
                    <Image src={product.image} alt={product.name} fluid ></Image>
+                   <ul className="list-group list-group-horizontal pt-2 pb-2" variant='flush'>
+  <li className="list-group-item"><Image src={product.image} alt={product.name} fluid ></Image></li>
+  <li className="list-group-item"><Image src={product.image} alt={product.name} fluid ></Image></li>
+  <li className="list-group-item"><Image src={product.image} alt={product.name} fluid ></Image></li>
+  <li className="list-group-item"><Image src={product.image} alt={product.name} fluid ></Image></li>
+</ul>
                </Col>
                <Col md={5}>
 <ListGroup variant='flush'>
@@ -79,14 +71,13 @@ const submitHandler = (e) =>{
     </ListGroup.Item>
     <ListGroup.Item>
     <h4>{product.name}</h4>
-    <i class="far fa-heart fa-2x"></i>
     </ListGroup.Item>
     <ListGroup.Item>
       <h2>${product.price}</h2>
     </ListGroup.Item>
                            <ListGroup.Item>
                                <Row>
-                                   <Col>Status</Col>
+                                   <Col md={2}>Status</Col>
                                    <Col>
                                    <strong>
                                        {product.countInStock > 0 ? 'In Stock' : 'Out of Stock' }
@@ -94,13 +85,20 @@ const submitHandler = (e) =>{
                                        </Col>
                                </Row>
                            </ListGroup.Item>
-                       
+                           <ListGroup.Item>
+                               <Row>
+                                   <Col md={2}>Colors</Col>
+                                   <Col><span className="dot ml-2"></span>
+<span className="dot ml-2"></span>
+<span className="dot ml-2"></span></Col>
+                               </Row>
+                           </ListGroup.Item>
                             <ListGroup.Item>
                             { product.countInStock > 0 &&(
                                 <Row>
-                                    <Col>Qty</Col>
-                                    <Col>
-                                    <Form.Control as='select' value={qty} onChange={(e) => setQty(e.target.value)} >
+                                    <Col md={2}>Qty</Col>
+                                    <Col md={3} >
+                                    <Form.Control  as='select' value={qty} onChange={(e) => setQty(e.target.value)} >
                                         {[...Array(product.countInStock).keys()].map((x) =>(
                                             <option key= { x + 1} value={ x + 1 }>
                                                 { x + 1}
@@ -113,10 +111,9 @@ const submitHandler = (e) =>{
                             </ListGroup.Item>
                        
                            <ListGroup.Item>
-                               <Button onClick={addToCartHandler} className='"btn btn-outline-dark float-left' style={{width: '163px'}} type='button' disabled={product.countInStock === 0}>Add To Cart</Button>
-                            
-                               <Button onClick={buyHandler} className='btn btn-dark float-right 'style={{width: '163px'}} type='button' disabled={product.countInStock === 0}>Buy It Now</Button>
-
+    
+                               <Button onClick={addToCartHandler} className='"btn btn-default mr-2' type='button' disabled={product.countInStock === 0}>Add To Cart</Button>
+							<Button className="btn btn-default ml-2" type="button"><span class="fa fa-heart"></span></Button>
                            </ListGroup.Item>
     <ListGroup.Item>
         <Row>
@@ -128,7 +125,7 @@ const submitHandler = (e) =>{
                   
                </Col>
            </Row>
-           
+          
         <Row>
             <Col md={6}>
                 <h2>Reviews</h2>
