@@ -37,6 +37,9 @@ const logoutHandler =()=>{
           <LinkContainer to='/profile'>
             <NavDropdown.Item className='drowndown'>Profile</NavDropdown.Item>
           </LinkContainer>
+          <LinkContainer to='/myorder'>
+            <NavDropdown.Item className='drowndown'>My Order</NavDropdown.Item>
+          </LinkContainer>
           <NavDropdown.Item className='drowndown' onClick={logoutHandler}>LogOut</NavDropdown.Item>
         </NavDropdown>
       ):

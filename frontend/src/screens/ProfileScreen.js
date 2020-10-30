@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react'
 import {LinkContainer} from 'react-router-bootstrap'
-import {Row,Col,Button,Form,Table} from 'react-bootstrap'
+import {Row,Col,Button,Form,Table,Image} from 'react-bootstrap'
 import {useDispatch,useSelector} from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -26,8 +26,7 @@ const {userInfo} = userLogin
 const userUpdateProfile=useSelector(state => state.userUpdateProfile)
 const {success} = userUpdateProfile
 
-const orderListMy=useSelector(state => state.orderListMy)
-const {loading : loadingOrders,error:errorOrders, orders } = orderListMy
+
 
 useEffect(() => {
     if(!userInfo){
@@ -36,7 +35,6 @@ useEffect(() => {
     else{
         if(!user.name){
             dispatch(getProfile('profile'))
-            dispatch(listMyorders())
         }
         else{
             setName(user.name)
@@ -61,17 +59,48 @@ const submitHandler =(e)=>{
         <Row>
             <Col md={3}>
             <Meta title='Profile' />
-            <h1>PROFILE</h1>
-            {error && <Message variant='danger'>{error}</Message>}
+
+            <Row  className="shadow-lg p-2 mb-4 bg-white">
+            <Col md={1}>
+                <Image src='https://img1a.flixcart.com/www/linchpin/fk-cp-zion/img/profile-pic-male_2fd3e8.svg'/>
+            </Col>
+            <Col className='ml-5'>
+            Hello
+            <h5>{name}</h5>
+            </Col>
+            </Row>
+            
+            </Col>
+           <Col md={8} className="shadow-lg p-5 mb-4 bg-white ml-5">
+           {error && <Message variant='danger'>{error}</Message>}
             {success && <Message variant='success'>Profile Update</Message>}
             {message && <Message variant='danger'>{message}</Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
-            <Form.Group ControlId='email'>
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control type='text' placeholder='full name' value={name} onChange={(e)=>setName(e.target.value)}>
+                <Row>
+                <Col md={4}> <h5>Personal Information </h5></Col>
+                <span><a href='#'>Edit</a></span>
+                </Row>
+                <Row>
+                    <Col md={4}>
+            <Form.Group ControlId='name'>
+                    <Form.Control type='text' placeholder='first name' value={name} onChange={(e)=>setName(e.target.value)}>
                     </Form.Control>
                 </Form.Group>
+                </Col>
+                <Col md={4}>
+            <Form.Group ControlId='name'>
+                    <Form.Control type='text' placeholder='last name' value={name} onChange={(e)=>setName(e.target.value)}>
+                    </Form.Control>
+                </Form.Group>
+                </Col>
+                </Row>
+                <Form.Group ControlId='email'>
+                <Form.Label>Your Gender</Form.Label>
+                    
+                    <Form.Check type='radio' inline label="1"  />
+      <Form.Check type='radio' inline label="2"  />
+      </Form.Group>
                 <Form.Group ControlId='email'>
                     <Form.Label>Email</Form.Label>
                     <Form.Control type='email' placeholder='email' value={email} onChange={(e)=>setEmail(e.target.value)}>
@@ -91,46 +120,7 @@ const submitHandler =(e)=>{
                 UPDATE
                 </Button>
             </Form>
-            </Col>
-            <Col md={9}>
-               <h2>My Orders</h2>
-               { loadingOrders ? <Loader /> : errorOrders ? <Message variant='danger'>{errorOrders}</Message>: (
-                   <Table striped bordered hover responsive className='table-sm'>
-                       <thead>
-                           <tr>
-                               <th>ID</th>
-                               <th>DATE</th>
-                               <th>TOTAL</th>
-                               <th>PAID</th>
-                               <th>DELIVERIED</th>
-                               <th></th>
-                           </tr>
-                       </thead>
-                       <tbody>
-                           { orders.map(order=>(
-                               <tr key={order._id}>
-                                 
-                                   <td>{order._id}</td>
-                                   <td>{order.createdAt.substring(0,10)}</td>
-                                   <td>{order.totalPrice}</td>
-                                   <td>{order.isPaid ? order.paidAt.substring(0,10) : (
-                                       <i className='fas fa-times' style={{color:'red'}}></i>
-                                   )}</td>
-                                   <td>{order.isDeliveried ? order.deliveriedAt.substring(0,10) : (
-                                       <i className='fas fa-times' style={{color:'red'}}></i>
-                                   )}</td>
-                                   <td>
-                                       <LinkContainer to={`/order/${order._id}`}>
-                                           <Button variant='info' className='btn btn-sm ml-2'>Details</Button>
-                                       </LinkContainer>
-                                   </td>
-                                   
-                               </tr>
-                           ))}
-                       </tbody>
-                   </Table>
-               )}
-            </Col>
+           </Col>
         </Row>
        
     )
