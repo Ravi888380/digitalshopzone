@@ -95,12 +95,9 @@ const submitHandler =(e)=>{
                 </Form.Group>
                 </Col>
                 </Row>
-                <Form.Group ControlId='email'>
-                <Form.Label>Your Gender</Form.Label>
-                    
-                    <Form.Check type='radio' inline label="1"  />
-      <Form.Check type='radio' inline label="2"  />
-      </Form.Group>
+                <p>Your Gender</p>
+                    <Form.Check className='mb-2 pb-2' type='radio' inline label="Male"  />
+      <Form.Check type='radio' inline label="Female"  />
                 <Form.Group ControlId='email'>
                     <Form.Label>Email</Form.Label>
                     <Form.Control type='email' placeholder='email' value={email} onChange={(e)=>setEmail(e.target.value)}>

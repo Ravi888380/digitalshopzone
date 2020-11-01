@@ -35,10 +35,13 @@ const logoutHandler =()=>{
       {userInfo ? (
         <NavDropdown title={userInfo.name} className='dropdown' data-hover="dropdown" data-toggle="dropdown" id='username'>
           <LinkContainer to='/profile'>
-            <NavDropdown.Item className='drowndown'>Profile</NavDropdown.Item>
+            <NavDropdown.Item className='drowndown'>My Profile</NavDropdown.Item>
           </LinkContainer>
           <LinkContainer to='/myorder'>
-            <NavDropdown.Item className='drowndown'>My Order</NavDropdown.Item>
+            <NavDropdown.Item className='drowndown'><i className='fas fa-info-square'></i>Orders</NavDropdown.Item>
+          </LinkContainer>
+          <LinkContainer to='/myorder'>
+            <NavDropdown.Item className='drowndown'>Whislist</NavDropdown.Item>
           </LinkContainer>
           <NavDropdown.Item className='drowndown' onClick={logoutHandler}>LogOut</NavDropdown.Item>
         </NavDropdown>
