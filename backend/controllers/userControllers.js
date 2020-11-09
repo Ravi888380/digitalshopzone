@@ -10,7 +10,8 @@ const authUser = asyncHandler(async(req,res)=>{
     if(user && (await user.matchPassword(password))){
         res.json({
             _id:user._id,
-            name:user.name,
+            fname:user.fname,
+            lname:user.lname,
             email:user.email,
             isAdmin:user.isAdmin,
             token:generateToken(user._id)
@@ -26,7 +27,7 @@ const authUser = asyncHandler(async(req,res)=>{
 
 const registerUser = asyncHandler(async(req,res)=>{
 
-    const {name,email,password} = req.body
+    const {fname,lname,email,password} = req.body
     
     const userExists = await User.findOne({email})
     if(userExists){
@@ -34,14 +35,16 @@ const registerUser = asyncHandler(async(req,res)=>{
         throw new Error('email already exists')
     }
     const user=await User.create({
-        name, 
+        fname, 
+        lname,
         email,
         password
     })
     if(user){
         res.status(201).json({
             _id:user._id,
-            name:user.name,
+            fname:user.fname,
+            lname:user.lname,
             email:user.email,
             isAdmin:user.isAdmin,
             token:generateToken(user._id)
@@ -64,7 +67,8 @@ const getUserProfile = asyncHandler(async(req,res)=>{
     if(user){
 res.json({
     _id:user._id,
-    name:user.name,
+    fname:user.fname,
+    lname:user.lname,
     email:user.email,
     isAdmin:user.isAdmin,
 })
@@ -79,7 +83,8 @@ res.json({
 const updateUserProfile = asyncHandler(async(req,res)=>{
     const user=await User.findById(req.user._id)
     if(user){
-        user.name = req.body.name || user.name
+        user.fname = req.body.fname || user.fname
+        user.lname = req.body.lname || user.lname
         user.email = req.body.email || user.email
         if(req.body.password){
             user.password === req.body.password
@@ -87,7 +92,8 @@ const updateUserProfile = asyncHandler(async(req,res)=>{
         const updateUser= await user.save()
         res.json({
             _id:updateUser._id,
-            name:updateUser.name,
+            fname:updateUser.fname,
+            lname:updateUser.lname,
             email:updateUser.email,
             isAdmin:updateUser.isAdmin,
             token:generateToken(updateUser._id)
@@ -135,14 +141,16 @@ const getUserById = asyncHandler(async(req,res)=>{
 const updateUser = asyncHandler(async(req,res)=>{
     const user=await User.findById(req.params.id)
     if(user){
-        user.name = req.body.name || user.name
+        user.fname = req.body.fname || user.fname
+        user.lname = req.body.lname || user.lname
         user.email = req.body.email || user.email
         user.isAdmin = req.body.isAdmin || user.isAdmin
        
         const updateUser= await user.save()
         res.json({
             _id:updateUser._id,
-            name:updateUser.name,
+            fname:updateUser.fname,
+            lname:updateUser.lname,
             email:updateUser.email,
             isAdmin:updateUser.isAdmin,
         })

@@ -23,7 +23,7 @@ const App = () => {
 <Router>
 <Header/>
       <main className='py-3'>
-        <Container>
+        <Container className='p-1'>
        <Route path='/login' component={LoginScreen} />
        <Route path='/profile' component={ProfileScreen} />
        <Route path='/admin/userlist' component={UserListScreen} />

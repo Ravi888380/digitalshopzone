@@ -30,6 +30,7 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "path": "^0.12.7",
+    "react-inputs-validation": "^4.5.2",
     "react-social-login": "^3.4.10",
     "react-social-login-buttons": "^3.1.0"
   },

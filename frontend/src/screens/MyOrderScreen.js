@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react'
 import {LinkContainer} from 'react-router-bootstrap'
-import {Row,Col,Button,Table} from 'react-bootstrap'
+import {Row,Col,Button,Table,Image} from 'react-bootstrap'
 import {useDispatch,useSelector} from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -41,6 +41,7 @@ const MyOrderScreen = ({history}) => {
                        <thead>
                            <tr>
                                <th>ID</th>
+                               <th>IMAGE</th>
                                <th>DATE</th>
                                <th>TOTAL</th>
                                <th>PAID</th>
@@ -53,6 +54,7 @@ const MyOrderScreen = ({history}) => {
                                <tr key={order._id}>
                                  
                                    <td>{order._id}</td>
+                                   <td><Image src={order.image} alt={order.name}></Image></td>
                                    <td>{order.createdAt.substring(0,10)}</td>
                                    <td>{order.totalPrice}</td>
                                    <td>{order.isPaid ? order.paidAt.substring(0,10) : (
