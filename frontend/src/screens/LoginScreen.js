@@ -30,12 +30,7 @@ const submitHandler =(e)=>{
     dispatch(login(email,password))
 }
 const responseGoogle = (response) => {
-    response.preventDefault()
-    email=response.profileObj.email
-    const fname=response.profileObj.givenName
-    const lname=response.profileObj.familyName
-    password=null
-    dispatch(register(fname,lname,email,password))
+  console.log(response);
   }
   const responseFacebook = (response) => {
     console.log(response);
@@ -53,9 +48,10 @@ const responseGoogle = (response) => {
                 <FacebookLogin
   appId="1090622748059665"
   autoLoad
+  fields="name,email,picture"
   callback={responseFacebook}
   render={renderProps => (
-    <FacebookLoginButton onClick={renderProps.onClick}/>
+    <FacebookLoginButton onClick={renderProps.onClick} />
   )}
 />
           </Col>
