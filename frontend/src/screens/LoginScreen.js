@@ -6,17 +6,16 @@ import Loader from '../components/Loader'
 import Meta from '../components/Meta'
 import {Link} from 'react-router-dom'
 import {login  } from '../actions/userActions'
+import {register  } from '../actions/userActions'
 import FormContainer from '../components/FormContainer'
+import GoogleLogin from 'react-google-login'
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { FacebookLoginButton,GoogleLoginButton } from "react-social-login-buttons";
 
 const LoginScreen = ({location,history}) => {
-
-
-
     const [email,setEmail]=useState('')
     const[password,setPassword]=useState('')
     const redirect = location.search ? Number (location.search.split('=')[1]) : '/'
-
     const dispatch =useDispatch()
 const userLogin=useSelector(state => state.userLogin)
 const {loading,error,userInfo} = userLogin
@@ -30,8 +29,17 @@ const submitHandler =(e)=>{
     e.preventDefault()
     dispatch(login(email,password))
 }
-
-
+const responseGoogle = (response) => {
+    response.preventDefault()
+    email=response.profileObj.email
+    const fname=response.profileObj.givenName
+    const lname=response.profileObj.familyName
+    password=null
+    dispatch(register(fname,lname,email,password))
+  }
+  const responseFacebook = (response) => {
+    console.log(response);
+  }
     return (
         
         <FormContainer >
@@ -42,10 +50,26 @@ const submitHandler =(e)=>{
             {loading && <Loader />}
             <Row>
                 <Col md={6}>
-                <FacebookLoginButton onClick={() => alert("Hello")} />
-                </Col>
+                <FacebookLogin
+  appId="1090622748059665"
+  autoLoad
+  callback={responseFacebook}
+  render={renderProps => (
+    <FacebookLoginButton onClick={renderProps.onClick}/>
+  )}
+/>
+          </Col>
                 <Col md={6}>
-                <GoogleLoginButton onClick={() => alert("Hello")} />
+                <GoogleLogin
+    clientId="1080774598906-ppk3kebjad26rt3aat8u0mf4gbvh8qpl.apps.googleusercontent.com"
+    render={renderProps => (
+      <GoogleLoginButton onClick={renderProps.onClick} disabled={renderProps.disabled} />
+    )}
+    buttonText="Login"
+    onSuccess={responseGoogle}
+    onFailure={responseGoogle}
+    cookiePolicy={'single_host_origin'}
+  />
                 </Col>
             </Row>
             <Row>
